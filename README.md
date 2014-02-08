@@ -32,7 +32,10 @@ Configuration
 -------------
 
 Configuration of accounts names, operations categories, auto-categorization
-and cleanup sed script is done editing text files.
+and cleanup sed script is done editing text files in directory ``./etc/``.
 
 Configuration of online bank account credentials is done using boobank
-or editing boobank config text files.
+or editing boobank config files in directory ``~/.config/weboob/backends``.
+
+Configuration of current account balance is done editing account data file
+in directory ``./server/``.
