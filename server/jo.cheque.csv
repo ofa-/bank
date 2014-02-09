@@ -1,0 +1,23 @@
+07/02/14;;VIREMENT PEL;;-50.00;;Bank > Epargne;*
+04/02/14;;CB 5 A SEC FACT 010214 (carnet x10);;-55.00;;?;*
+30/01/14;;CB FNAC FACT 290114 kado Alain;;-95.00;;Bank
+30/01/14;;LIQ <= kado Alain (remb liq);;+95.00;;Bank
+05/02/14;;LIQ => reste liq;;-70.00;;Divers > DAB
+05/02/14;;LIQ => kado Alain (part Jo);;-5.00;;Divers > Kado
+05/02/14;;LIQ => sandwich;;-6.00;;Resto > Midi
+05/02/14;;LIQ => bouffe;;-14.00;;Resto > Midi
+28/01/14;;RETRAIT DAB 0230560 280114 13H28;;-20.00;;Divers > DAB
+20/01/14;;CB SUPER U FACT 170114;;-18.52;;Life > Courses
+15/01/14;;* COT FORFAIT FSE +;;-4.50;;Bank > Forfait
+14/01/14;;CB A.R.E.A. FACT 110114;;-10.20;;Voiture > Autoroute
+14/01/14;;CB MONOPRIX FACT 110114;;-76.79;;Life > Courses
+09/01/14;;CB ZAPSPORTS FACT 080114;;-16.50;;Loisirs > Sport
+09/01/14;;FREE MOBILE;;-7.44;;Télécom > Mobile
+07/01/14;;CB SUPER U FACT 040114;;-59.96;;Life > Courses
+07/01/14;;VIREMENT PEL;;-50.00;;Bank > Epargne
+04/01/14;;CB DARTY.COM FACT 020114 (fer a repasser);;-29.90;;Appart > Divers
+04/01/14;;CB RESTAURANT LE S FACT 020114;;-10.20;;Resto > Midi
+03/01/14;;CB AUTOROUTE DU SU FACT 010114;;-6.10;;Voiture > Autoroute
+03/01/14;;INTERETS CREDITEURS;;0.32;;Bank
+02/01/14;;CB CARREFOURMARKET FACT 301213;;-46.41;;Life > Courses
+SOLDE PRECEDENT = +1000.00
