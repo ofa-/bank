@@ -842,12 +842,8 @@ function getDescendantsByTagName(obj, tagName, childrenOnly) {
 // func below courtesy of http://stackoverflow.com/questions/4817029/#4819886
 
 function is_touch_device() {  
-	try {  
-		document.createEvent("TouchEvent");  
-		return true;  
-	} catch (e) {  
-		return false;  
-	}  
+	return 'ontouchstart' in window // works on most browsers 
+		|| 'onmsgesturechange' in window; // works on ie10
 }
 
 function setOnFocusForInputs() {
