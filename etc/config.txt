@@ -1,0 +1,15 @@
+# encoding: UTF-8
+grouped_accounts = {
+	"jo+ol": "ol.cheque jo.cheque",
+}
+download_buttons = {
+	"download": "jo.cheque ol.cheque",
+	"download-all": "--all",
+}
+income_categories = [
+	"Salaire > Paye",
+]
+savings_categories = [
+	"Bank > Épargne",
+	"Bank > Epargne",
+]

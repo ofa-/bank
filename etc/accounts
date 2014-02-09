@@ -1,0 +1,10 @@
+# ID		BOOBANK-REFERENCE	LABEL (unused; use "boobank ls")
+
+ol.cheque	0123456789@cealpes-ol	CPT DEPOT PART.
+ol.livret	1123456789@cealpes-ol	LIVRET A
+ol.pel		2123456789@cealpes-ol	PEL 16
+
+jo.cheque	0987654321@cealpes-jo	CPT DEPOT PART.
+jo.livret	1987654321@cealpes-jo	LIVRET A
+jo.ldd		2987654321@cealpes-jo	LIVRET DEV. DURABLE
+

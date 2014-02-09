@@ -1,0 +1,34 @@
+#!/bin/bash
+
+usage() { echo "usage: $(basename $0) <start|stop|restart|status>"; }
+
+error() { echo $1 >&2; exit 1; }
+
+dir="$(dirname "$0")/../server"
+pid=$(ps aux | awk '/http-server.py -bank$/ {print $2}')
+case $1 in
+	""|-h|--help)
+		usage
+		;;
+	start)
+		[ "$pid" ] && error "already started"
+		cd "$dir"
+		../bin/http-server.py -bank > http-server.log 2>&1 &
+		;;
+	stop)
+		[ "$pid" ] || error "not started"
+		kill -9 $pid
+		;;
+	restart)
+		[ "$pid" ] && $0 stop
+		$0 start
+		;;
+	status)
+		[ "$pid" ] && echo "UP, PID=$pid"
+		[ "$pid" ] || echo "DOWN"
+		;;
+	*)
+		usage >&2
+		error "unknown command '$1'"
+		;;
+esac
