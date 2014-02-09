@@ -39,3 +39,27 @@ or editing boobank config files in directory ``~/.config/weboob/backends``.
 
 Configuration of current account balance is done editing account data file
 in directory ``./server/``.
+
+
+Installation
+------------
+
+You can try out the application right away using the provided sample data
+and configuration.  Make sure you have ``python`` installed, checkout the
+project, then run ``./bin/bank --start``.
+
+To download online-bank accounts data you, will need ``boobank`` installed
+and configured.  In addition, auto-categorization requires various basics
+such as ``sed``, ``awk``, ``grep`` and ``bash``, all of which are probably
+already installed in your distribution.
+
+To install ``boobank``, try ``sudo apt-get install weboob``.  Be sure to
+read the note below, and checkout http://weboob.org/applications/boobank
+
+Enjoy.
+
+
+Note: project ``boobank`` is still moving fast, and provides regular updates,
+both internal and online-banks backends fixes.  While this takes care of the
+woes of online-banks "improvements" for you, it can break your install.  You
+may wish to git clone the project and setup a "User install" as recommended.
