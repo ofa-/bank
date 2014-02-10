@@ -1,0 +1,76 @@
+<html>
+<style>
+#dataTable td {
+	padding-right: 1em;
+}
+#textQuery {
+	position: fixed;
+}
+#dataTable {
+	padding-top: 1.5em;
+}
+</style>
+<script>
+var accounts = %%ACCOUNTS%%;
+
+var dataTable;
+var query;
+
+function init() {
+	dataTable = document.getElementById("dataTable");
+	query = document.getElementById("textQuery");
+	
+	query.onkeyup = updateTable;
+
+	for (var i in accounts) {
+		var account = accounts[i];
+		var data = getData(account);
+		var lines = data.split("\n");
+		for (var i in lines) {
+			var fields = lines[i].split(";;");
+			if (! fields[3]) {
+				continue;
+			}
+			var line = makeLine(account, fields[0], fields[1], fields[2], fields[3]);
+			dataTable.appendChild(line);
+		}
+	}
+	query.focus();
+}
+
+function updateTable() {
+	var keywords = query.value.toLowerCase().split(" ");
+	for (var i=0; i < dataTable.children.length; i++) {
+		var row = dataTable.children[i];
+		var text = getText(row).toLowerCase();
+		var show = true;
+		for (var j=0; j < keywords.length; j++)
+			show &= text.indexOf(keywords[j]) != -1;
+		row.style.display = show ? "" : "none";
+	}
+}
+
+function getText(node) {
+	return node.innerHTML.replace(/<[^>]*>/g, ";").replace("&lt;", "<").replace("&gt;", ">");
+}
+
+function makeLine(account, date, text, amount, category) {
+	var row = document.createElement("tr");
+	row.innerHTML = "<td>" + account + "</td><td>" + date + "</td><td>" + text + "</td><td align=right>" + amount + "</td><td>" + category + "</td>" ;
+	return row;
+}
+
+function getData(account) {
+	var req = new XMLHttpRequest();
+	req.open("GET", "/data/" + account + ".csv", false);
+	req.send(null);
+	return req.responseText;
+}
+
+onload = init;
+</script>
+<body>
+<input id="textQuery">
+<table id="dataTable"></table>
+</body>
+</html>

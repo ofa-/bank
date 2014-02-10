@@ -33,6 +33,13 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 	elif self.path.startswith("/download"):
 		self.download(download_buttons["download"])
 
+	elif self.path.startswith("/search"):
+		self.build_search_page()
+
+	elif self.path.startswith("/data/"):
+		account = self.path.split('/data/')[1].replace('?','')
+		self.send_account_data(account)
+
 	elif self.path.startswith("/view/"):
 		account = self.path.split('/view/')[1].replace('?','')
 		if account in grouped_accounts:
@@ -124,11 +131,28 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 -->
 		<input type="submit" value="DOWNLOAD" onclick="this.form.action='/download';">
 		<input type="submit" value="DOWNLOAD ALL" onclick="this.form.action='/download-all';">
+		<input type="submit" value="SEARCH" onclick="this.form.action='/search';">
 	""")
 
 	self.wfile.write('</form>\n');
 	self.emit_html_tail()
 
+
+    def build_search_page(self):
+	self.send_response(200)
+	self.send_header("Content-type", "text/html; charset=UTF-8")
+	self.end_headers()
+	files = filter(lambda x: x.endswith(".csv"), os.listdir("."))
+	accounts = [f.replace('.csv', '') for f in files]
+	pagetext = file("../bin/search.html").read();
+	self.wfile.write(pagetext.replace("%%ACCOUNTS%%", str(accounts)))	
+
+    def send_account_data(self, account):
+	self.send_response(200)
+	self.send_header("Content-type", "text/plain; charset=UTF-8")
+	self.end_headers()
+	self.wfile.write(file(account).read())	
+	
 
     def build_stats_page(self, account):
 	self.emit_html_head(title=account)
