@@ -550,7 +550,7 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 	self.wfile.write('<div>')
 	self.wfile.write('<tt>%s</tt> ' % date_str)
 	self.wfile.write('<input value="%s" size="40">' % comment_str)
-	self.wfile.write('<tt>::</tt>')
+	self.wfile.write('<tt id="s">::</tt>')
 	self.wfile.write('<tt id="e">%s</tt>' % amount_str)
 	self.wfile.write('<a%s>%s</a>' % (to_check, category))
 	self.wfile.write('</div>\n')
@@ -587,12 +587,13 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 	form a    { position: absolute; width: 20em; padding-top: .5em; margin-left: 7em; }
 	form a    { font-family: monospace; text-decoration: none; color: inherit; }
 	a.check   { text-decoration: underline; color: blue; }
-	input.amt { text-align: right; }
+	input.amt { text-align: right; width: 5.4em; }
 	#menubox  { 	position: absolute; display: none;
 			border: solid 1px orange; background: #20E0E0;
 			cursor: default; width:33em; font-family: monospace;
 		}
 	#menubox a { cursor: pointer; }
+	form tt#s { cursor: pointer; }
 	</style>
 	"""
 	)
@@ -792,7 +793,7 @@ function splitLine(ev) {
 }
 
 function createAmountInput(amountElt, value) {
-	amountElt.innerHTML = "<input size='7' class='amt'>";
+	amountElt.innerHTML = "<input class='amt'>";
 	amountElt.firstChild.value = value;
 	amountElt.style.paddingTop = 0;
 	return amountElt.firstChild;
