@@ -56,7 +56,11 @@ function getText(node) {
 
 function makeLine(account, date, text, amount, category) {
 	var row = document.createElement("tr");
-	row.innerHTML = "<td>" + account + "</td><td>" + date + "</td><td>" + text + "</td><td align=right>" + amount + "</td><td>" + category + "</td>" ;
+	for (var i=0; i < arguments.length; i++) {
+		row.appendChild(document.createElement("td"));
+		row.lastChild.innerHTML = arguments[i];
+	}
+	row.children[3].setAttribute("align", "right");
 	return row;
 }
 
