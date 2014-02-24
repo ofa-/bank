@@ -1,2 +1,4 @@
 http-server.log
 *.bak
+*.csv
+*/
