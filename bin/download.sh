@@ -27,7 +27,7 @@ esac
 }
 
 list_accounts() {
-	cat $ACCOUNTS | egrep -v "^[:space:]*#" | awk '$1 {print $1}'
+	cat $ACCOUNTS | egrep -v "^[[:space:]]*#" | awk '$1 {print $1}'
 }
 
 download() {
