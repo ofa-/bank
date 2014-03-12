@@ -180,7 +180,7 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 			income += self.get_income(months, total[cat])
 	spendings = minus + plus - income
 	# display yearly totals
-	self.wfile.write("""<th class="tot" valign="top">Total<br>Annuel<div style="text-align: right">%+.0f<br>%+.0f<br><u>%+.0f</u><br>%+.0f</div></th>\n""" % (savings, spendings, income, balance) )
+	self.wfile.write("""<th class="tot" valign="top">Total<br>Période<div style="text-align: right">%+.0f<br>%+.0f<br><u>%+.0f</u><br>%+.0f</div></th>\n""" % (savings, spendings, income, balance) )
 	# display monthly totals
 	for m in months:
 		(ops, minus, plus, savings) = month[m]
