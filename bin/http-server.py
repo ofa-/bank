@@ -764,8 +764,10 @@ function updateValue(input) {
 	var linkedVal = parseFloat(linked.value);
 	var prevVal = parseFloat(input.prev) || 0;
 	if (isNaN(inputVal)) inputVal = prevVal;
-	if (linkedVal * inputVal < 0) inputVal = - inputVal;
-	if (linkedVal * (linkedVal + prevVal - inputVal) <= 0) inputVal = prevVal;
+	if (linkedVal * inputVal < 0 && !input.value[0].match(/[+-]/))
+		inputVal = - inputVal;
+	if (linkedVal * (linkedVal + prevVal - inputVal) <= 0)
+		inputVal = prevVal;
 	linked.value = (linkedVal + prevVal - inputVal).toFixed(2);
 	linked.prev = linked.value;
 	input.value = inputVal.toFixed(2);
