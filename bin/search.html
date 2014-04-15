@@ -3,8 +3,20 @@
 #dataTable td {
 	padding-right: 1em;
 }
-#textQuery {
+#query {
 	position: fixed;
+	background-color: #EEE;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0.3em;
+	width: 100%;
+}
+#textQuery {
+	width: 20em;
+}
+#totalAmount {
+	margin-left: 1em;
 }
 #dataTable {
 	padding-top: 1.5em;
@@ -15,10 +27,12 @@ var accounts = %%ACCOUNTS%%;
 
 var dataTable;
 var query;
+var total;
 
 function init() {
 	dataTable = document.getElementById("dataTable");
 	query = document.getElementById("textQuery");
+	total = document.getElementById("totalAmount");
 	
 	query.onkeyup = updateTable;
 
@@ -40,6 +54,7 @@ function init() {
 
 function updateTable() {
 	var keywords = query.value.toLowerCase().split(" ");
+	var sum = 0;
 	for (var i=0; i < dataTable.children.length; i++) {
 		var row = dataTable.children[i];
 		var text = getText(row).toLowerCase();
@@ -47,7 +62,9 @@ function updateTable() {
 		for (var j=0; j < keywords.length; j++)
 			show &= text.indexOf(keywords[j]) != -1;
 		row.style.display = show ? "" : "none";
+		sum += show ? parseFloat(row.children[3].innerHTML) : 0;
 	}
+	total.innerHTML = sum.toFixed(2);
 }
 
 function getText(node) {
@@ -74,7 +91,7 @@ function getData(account) {
 onload = init;
 </script>
 <body>
-<input id="textQuery">
+<div id="query"><input id="textQuery"><span id="totalAmount"/></div>
 <table id="dataTable"></table>
 </body>
 </html>
