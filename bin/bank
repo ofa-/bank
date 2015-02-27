@@ -4,16 +4,18 @@ usage() { echo "usage: $(basename $0) <start|stop|restart|status>"; }
 
 error() { echo $1 >&2; exit 1; }
 
-dir="$(dirname "$0")/../server"
-pid=$(ps aux | awk '/http-server.py -bank$/ {print $2}')
+log="/tmp/bank.log"
+cmd="http-server.py -- bank"
+
+pid=$(ps xo pid,cmd | awk "/$cmd"'$/ {print $1}')
 case $1 in
 	""|-h|--help)
 		usage
 		;;
 	start)
 		[ "$pid" ] && error "already started"
-		cd "$dir"
-		../bin/http-server.py -bank > http-server.log 2>&1 &
+		cd "$(dirname "$0")/../server"
+		exec python ../bin/$cmd >> $log 2>&1 &
 		;;
 	stop)
 		[ "$pid" ] || error "not started"
