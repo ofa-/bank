@@ -62,7 +62,7 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 	self.send_header("Content-type", "text/plain; charset=UTF-8")
 	self.end_headers()
 	self.wfile.write("  D o w n l o a d i n g  ".center(80, "="))
-	self.wfile.write("\n" + "\x0c"*1024 + "\n")
+	self.wfile.write("\n" * 2)
 	cmd = "../bin/download.sh " + args
 	f = os.popen(cmd)
 	c = f.read(1)
