@@ -15,16 +15,16 @@ get_account() {
 	do_download $ID $download
 
 	if [ -f $CONTEXT_FILE ] ; then
-		get_update_NB_LINES $CONTEXT_FILE $download
-		head -$NB_LINES $download > $ACCOUNT_FILE
+		diff -u $CONTEXT_FILE $download \
+		| sed '1,2 d' \
+		| egrep '^\+'  \
+		| sed 's:^+::' > $ACCOUNT_FILE
 	else
 		cat $download > $ACCOUNT_FILE
-		NB_LINES=$(cat $download | wc -l)
 	fi
-	head  $download > $CONTEXT_FILE
-	rm -f $download
+	mv $download $CONTEXT_FILE
 
-	if [ $NB_LINES -eq 0 ] ; then
+	if [ `wc -l < $ACCOUNT_FILE` -eq 0 ] ; then
 		fail -1 "DONE (no changes)"
 	fi
 	echo "DONE"
@@ -59,19 +59,6 @@ do_download() {
 		fail 3 "FAIL (download)"
 	fi
 	rm -f $error
-}
-
-get_update_NB_LINES() {
-	context=$1
-	target=$2
-
-	nb_matches=$(grep -c -F -f $context $target)
-	if [ $nb_matches = 0 ] ; then
-		NB_LINES=$(cat $target | wc -l)
-		return 1
-	fi	
-	NB_LINES=$(grep -n -F -f $context $target | cut -d: -f1 | sort -n | head -1)
-	NB_LINES=$((NB_LINES - 1))
 }
 
 fail() {
