@@ -42,7 +42,7 @@ sanity_checks() {
 	[ -f $ACCOUNTS ]		|| { echo "accounts file '$ACCOUNTS' not found"; exit 1; }
 	[ -x get-account.sh ]		|| { echo "utility 'get-account.sh' not found"; exit 1; }
 	[ -x update-server-db.sh ]	|| { echo "utility 'update-server-db.sh' not found"; exit 1; }
-	boobank --version &> /dev/null	|| { echo "utility 'boobank' not found"; exit 1; }
+	which boobank &> /dev/null	|| { echo "utility 'boobank' not found"; exit 1; }
 }
 
 sanity_checks
