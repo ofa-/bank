@@ -9,7 +9,7 @@ ACCOUNTS="../etc/accounts"
 BOOBANK="boobank -I"
 
 get_account() {
-	printf "Downloading %-15s %-30s " "$ACCOUNT" "($ID)"
+	printf "Downloading %-15s %-40s " "$ACCOUNT" "($ID)"
 
 	download=../update/download-$ACCOUNT
 	do_download $ID $download
