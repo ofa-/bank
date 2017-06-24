@@ -44,9 +44,9 @@ do_download() {
 
 	# header line (= format) may be preceeded by parse errors
 	$BOOBANK "count off; formatter csv; history $account_id" 2> $error \
-	| sed '0, /id;date;rdate;vdate;type;raw;category;label;amount/ d' \
+	| sed '0, /id;url;date;rdate;vdate;type;raw;category;label;amount/ d' \
 	| awk -v 'FS=;' '{
-		date=$2; amount=$9; label=$6;
+		date=$3; amount=$10; label=$7;
 		split(date, d, "-"); dd=d[3]; mm=d[2]; yy=substr(d[1], 3);
 		if (amount > 0) amount="+" amount
 		print dd "/" mm "/" yy ";;" label ";;" amount ";;"
