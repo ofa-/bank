@@ -43,6 +43,7 @@ do_download() {
 	error=$target.error
 
 	# header line (= format) may be preceeded by parse errors
+	PYTHONIOENCODING=utf-8 \
 	$BOOBANK "count off; formatter csv; history $account_id" 2> $error \
 	| sed '0, /id;url;date;rdate;vdate;type;raw;category;label;amount/ d' \
 	| sort -r \
