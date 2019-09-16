@@ -4,6 +4,10 @@ usage() { echo "usage: $(basename $0) <start|stop|restart|status>"; }
 
 error() { echo $1 >&2; exit 1; }
 
+notify_started() {
+       python -c "import gtk; gtk.gdk.notify_startup_complete()"
+}
+
 log="/tmp/bank.log"
 cmd="http-server.py -- bank"
 
@@ -16,6 +20,7 @@ case $1 in
 		[ "$pid" ] && error "already started"
 		cd "$(dirname "$0")/../server"
 		exec python ../bin/$cmd >> $log 2>&1 &
+		#notify_started
 		;;
 	stop)
 		[ "$pid" ] || error "not started"
