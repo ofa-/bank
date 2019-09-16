@@ -19,7 +19,7 @@ case $1 in
 	start)
 		[ "$pid" ] && error "already started"
 		cd "$(dirname "$0")/../server"
-		exec python ../bin/$cmd >> $log 2>&1 &
+		python ../bin/$cmd >> $log 2>&1 &
 		#notify_started
 		;;
 	stop)
