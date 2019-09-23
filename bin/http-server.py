@@ -99,7 +99,7 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
         files = filter(lambda x: x.endswith(".csv"), os.listdir("."))
         accounts = [f.replace('.csv', '') for f in files]
-        accounts = list(set(accounts + grouped_accounts.keys()))
+        accounts = list(set(accounts + list(grouped_accounts.keys())))
         accounts.sort()
 
         self.wfile.write("""
@@ -163,9 +163,9 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
         (total, month, text) = self.compute_stats(account)
 
-        categories = total.keys()
+        categories = list(total.keys())
         categories.sort()
-        months = month.keys()
+        months = list(month.keys())
         months.sort(reverse=True)
 
         self.wfile.write('<table>\n')
