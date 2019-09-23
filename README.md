@@ -47,7 +47,7 @@ Installation
 You can try out the application right away using the provided sample data
 and configuration.  Make sure you have ``python`` installed, checkout the
 project, copy sample files in place with ``tar c -C sample . | tar x``,
-then run ``./bin/bank --start``.
+then run ``./bin/bank start``.
 
 To download online-bank accounts data you, will need ``boobank`` installed
 and configured.  In addition, auto-categorization requires various basics
