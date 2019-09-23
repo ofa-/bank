@@ -8,7 +8,7 @@ notify_started() {
        python -c "import gtk; gtk.gdk.notify_startup_complete()"
 }
 
-log="/tmp/bank.log"
+log="../log/bank.log"
 cmd="http-server.py -- bank"
 
 pid=$(ps xo pid,cmd | awk "/$cmd"'$/ {print $1}')
@@ -19,6 +19,7 @@ case $1 in
 	start)
 		[ "$pid" ] && error "already started"
 		cd "$(dirname "$0")/../server"
+		[ -d "$(dirname $log)" ] || mkdir -p "$(dirname $log)"
 		python ../bin/$cmd >> $log 2>&1 &
 		#notify_started
 		;;
