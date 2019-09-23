@@ -78,9 +78,9 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
 
     def make_grouped_account_csv(self, account, members):
-        out = file(account + ".csv", "w")
+        out = open(account + ".csv", "w")
         for f in members:
-                out.write(file(f + ".csv").read())
+                out.write(open(f + ".csv").read())
         out.close()
 
 
@@ -147,14 +147,14 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.end_headers()
         files = filter(lambda x: x.endswith(".csv"), os.listdir("."))
         accounts = [f.replace('.csv', '') for f in files]
-        pagetext = file("../bin/search.html").read();
+        pagetext = open("../bin/search.html").read();
         self.wfile.write(pagetext.replace("%%ACCOUNTS%%", str(accounts)))
 
     def send_account_data(self, account):
         self.send_response(200)
         self.send_header("Content-type", "text/plain; charset=UTF-8")
         self.end_headers()
-        self.wfile.write(file(account).read())
+        self.wfile.write(open(account).read())
 
 
     def build_stats_page(self, account):
@@ -264,7 +264,7 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def get_previous_balance(self, account):
         ret = 0
         tag = "SOLDE PRECEDENT";
-        csv = file('./%s.csv' % account)
+        csv = open('./%s.csv' % account)
         lines = csv.readlines()
         for line in lines:
                 if line[0:len(tag)] != tag:
@@ -287,7 +287,7 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         text  = {}
         anti_alias = {}
 
-        csv = file('./%s.csv' % account)
+        csv = open('./%s.csv' % account)
         lines = csv.readlines()
         for line in lines:
                 fields = line.split(';')
@@ -454,8 +454,8 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                      'CONTENT_TYPE':self.headers['Content-Type'],
                      })
 
-        csv = file('./%s.csv' % account)
-        out = file('./%s.csv.new' % account, 'w')
+        csv = open('./%s.csv' % account)
+        out = open('./%s.csv.new' % account, 'w')
         i = 1
         lines = csv.readlines()
         for line in lines:
@@ -508,7 +508,7 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         """ % account
         )
 
-        csv = file('./%s.csv' % account)
+        csv = open('./%s.csv' % account)
         lines = csv.readlines()
         for line in lines:
                 fields = line.split(';')
@@ -528,7 +528,7 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.wfile.write("""
         <div id="menubox">
         """
-        + file("../etc/categories.html").read() +
+        + open("../etc/categories.html").read() +
         """
         </div>
         """
@@ -935,7 +935,7 @@ def check_file(f):
                 exit(1)
 
 def read_config():
-        exec(file("../etc/config.txt"), globals())
+        exec(open("../etc/config.txt").read(), globals())
         income_categories
         savings_categories
         grouped_accounts
