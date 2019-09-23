@@ -18,6 +18,9 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.build_main_page()
 
     def do_GET(self):
+
+        patch_wfile_write(self)
+
         if (self.path == "/"):
                 self.build_main_page()
 
@@ -904,6 +907,17 @@ def make_detail_line(fields):
         if len(text) > 60:
                 text = text[0:56] + "..."
         return ("%8s %-60s %9s\n" % (date, text, mony)).encode('utf-8')
+
+
+def patched_write(o, txt):
+    if hasattr(txt, 'encode'):
+        txt = txt.encode()
+    o._orig_w(txt)
+
+def patch_wfile_write(self):
+    import types
+    self.wfile._orig_w = self.wfile.write
+    self.wfile.write = types.MethodType(patched_write, self.wfile)
 
 
 #from datetime import strptime
