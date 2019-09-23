@@ -931,7 +931,7 @@ def is_date(str):
 
 def check_file(f):
         if not os.path.exists(f):
-                print "required file not found:", f
+                print("required file not found:", f)
                 exit(1)
 
 def read_config():
