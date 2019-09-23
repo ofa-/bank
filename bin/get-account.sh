@@ -54,8 +54,8 @@ do_download() {
 		print dd "/" mm "/" yy ";;" label ";;" amount ";;"
 	}' > $target
 
-	if egrep -q 'WARNING:|(Bug|Error)\(.*\):' $error ; then
-		fail 2 "FAIL (download)"
+	if egrep -q '(Bug|Error)\(.*\):' $error ; then
+		fail 2 "FAIL (download error)"
 	fi
 	if ! egrep -q '.*' $target ; then
 		fail 3 "FAIL (download)"
