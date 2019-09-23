@@ -100,7 +100,7 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         files = filter(lambda x: x.endswith(".csv"), os.listdir("."))
         accounts = [f.replace('.csv', '') for f in files]
         accounts = list(set(accounts + list(grouped_accounts.keys())))
-        accounts.sort()
+        accounts.sort(key=lambda s: s.lower())
 
         self.wfile.write("""
                 <hr>
