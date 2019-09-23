@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # encoding: UTF-8
 
-import BaseHTTPServer
+import http.server as BaseHTTPServer
 import cgi
 import os
 
