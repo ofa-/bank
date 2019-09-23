@@ -58,7 +58,7 @@ do_download() {
 		fail 2 "FAIL (download error)"
 	fi
 	if ! egrep -q '.*' $target ; then
-		fail 3 "FAIL (download)"
+		fail 3 "FAIL (empty download)"
 	fi
 	rm -f $error
 }
