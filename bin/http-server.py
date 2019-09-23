@@ -350,7 +350,7 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                 for (m, i) in zip(months, range(len(months))):
                         if m in total[c]:
                                 main_cat_total[i] += total[c][m]
-                                main_cat_text[i] += text[c][m]
+                                main_cat_text[i] += str(text[c][m])
         main_cat[main_cat_name] = (main_cat_total, main_cat_text)
 
         return main_cat
@@ -902,11 +902,11 @@ onload = function() {
 
 def make_detail_line(fields):
         date=fields[0].strip()
-        text=fields[2].strip().decode('utf-8')
+        text=fields[2].strip()
         mony=(fields[3]+fields[4]).strip()
         if len(text) > 60:
                 text = text[0:56] + "..."
-        return ("%8s %-60s %9s\n" % (date, text, mony)).encode('utf-8')
+        return ("%8s %-60s %9s\n" % (date, text, mony))
 
 
 def patched_write(o, txt):
