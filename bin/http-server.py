@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # encoding: UTF-8
 
 import http.server as BaseHTTPServer
@@ -15,6 +15,7 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def do_POST(self):
         #self.echo_form_fields()
         self.save_fields(account=self.path)
+        patch_wfile_write(self)
         self.build_main_page()
 
     def do_GET(self):
@@ -463,7 +464,7 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                 if not is_date(fields[0]):
                         out.write(line)
                         continue
-                has_amount = form.has_key("amount.%i" % i)
+                has_amount = ("amount.%i" % i) in form.keys()
                 if not has_amount:
                         desc_string = form["desc.%i" % i].value
                         cat_string  = form["cat.%i"  % i].value
@@ -481,7 +482,7 @@ class PostHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                                 out.write(";".join(fields))
                                 out.write('\n')
                         i += 1
-                        has_amount = form.has_key("amount.%i" % i)
+                        has_amount = ("amount.%i" % i) in form.keys()
 
         out.close()
         os.rename('./%s.csv.new' % account, './%s.csv' % account)

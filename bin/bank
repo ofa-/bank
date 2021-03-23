@@ -20,7 +20,7 @@ case $1 in
 		[ "$pid" ] && error "already started"
 		cd "$(dirname "$0")/../server"
 		[ -d "$(dirname $log)" ] || mkdir -p "$(dirname $log)"
-		python ../bin/$cmd >> $log 2>&1 &
+		../bin/$cmd >> $log 2>&1 &
 		#notify_started
 		;;
 	stop)
