@@ -64,3 +64,11 @@ Note: project ``boobank`` is still moving fast, and provides regular updates,
 both internal and online-banks backends fixes.  While this takes care of the
 woes of online-banks "improvements" for you, it can break your install.  You
 may wish to git clone the project and setup a "User install" as recommended.
+
+Note: installing weboob/boobank requires python 3.6+ nowadays.
+Requirements include lxml, which can be a challenge to build on a rpi.
+I used the following to get pip3 to build lxml :
+```
+sudo su
+root@raspberrypi:/home/pi/bank/weboob# CFLAGS=-O0 pip3 install lxml
+```
