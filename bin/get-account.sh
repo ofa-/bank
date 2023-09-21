@@ -48,7 +48,7 @@ do_download() {
 	| sed '0, /id;url;date;rdate;vdate;bdate;type;raw;category;label;amount/ d' \
 	| sort -r \
 	| awk -v 'FS=;' '{
-		date=$3; amount=$11; label=$8;
+		date=$3; amount=sprintf("%.2f", $11); label=$8;
 		split(date, d, "-"); dd=d[3]; mm=d[2]; yy=substr(d[1], 3);
 		if (amount > 0) amount="+" amount
 		print dd "/" mm "/" yy ";;" label ";;" amount ";;"
